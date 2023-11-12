@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/login.css';
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const simularLogin = () => {
-    
-    const usuarioFicticio = "usuarioEjemplo";
-    const contrasenaFicticia = "contrasenaEjemplo";
+    const usuarioIngresado = document.getElementById("username").value;
+    const contrasenaIngresada = document.getElementById("password").value;
 
-    document.getElementById("username").value = usuarioFicticio;
-    document.getElementById("password").value = contrasenaFicticia;
-
+    // Verifica las credenciales
+    if (usuarioIngresado === "jorge" && contrasenaIngresada === "123456789qqkkkk") {
+      window.location.href = "https://www.google.com/webhp?hl=es-419&sa=X&ved=0ahUKEwiKnrvyr7-CAxWprJUCHYvcA-0QPAgJ";
+    } else {
+      // Credenciales incorrectas, realiza alguna acción o muestra un mensaje de error
+      alert("usuario o contraseña incorrectas. Inténtalo de nuevo.");
+    }
   };
 
   return (
@@ -25,18 +34,24 @@ const Login = () => {
             className="user-name"
             placeholder="Username:"
           />
-          <input
-            type="password"
-            id="password"
-            className="pass-word"
-            placeholder="Password:"
-          />
+          <div className="password-input">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              className="pass-word"
+              placeholder="Password:"
+            />
+            <button
+              className="toggle-password"
+              onClick={togglePasswordVisibility}
+              tabIndex="-1"
+            >
+              {showPassword ? "Ocultar" : "Mostrar"}
+            </button>
+          </div>
         </div>
         <div className="button-login">
-          {/* Utiliza el elemento a para redirigir */}
-          <a href="https://www.google.com.bo/?&hl=es">
-            <button onClick={simularLogin}>Login</button>
-          </a>
+          <button onClick={simularLogin}>Login</button>
         </div>
       </div>
       <div className="draw-container">
